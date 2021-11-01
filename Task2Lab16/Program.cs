@@ -16,12 +16,16 @@ namespace Task2Lab16
             string path = "C:\\Users\\Gusev_A_D\\source\\repos\\Task1Lab16\\Task1Lab16\\bin\\Debug\\Products.json";
             string jsonstring = File.ReadAllText(path);
             Product[] arrayProduct = JsonSerializer.Deserialize<Product[]>(jsonstring);
-            string[] massive = jsonstring.Split();
-            foreach (string s in massive)
+            Product productWithMaxPrice = arrayProduct[0];
+            foreach (Product p in arrayProduct)
             {
-                Console.WriteLine("{0}", s);       //и на этом всё.. фантазия закончилась.
+                if (p.Price > productWithMaxPrice.Price)
+                {
+                    productWithMaxPrice = p;
+                }
             }
-            //Console.WriteLine(jsonstring);
+            Console.WriteLine("Самый дорогой товар:");
+            Console.WriteLine($"{productWithMaxPrice.Code} {productWithMaxPrice.Name} {productWithMaxPrice.Price}");
             Console.ReadKey();
         }
     }
